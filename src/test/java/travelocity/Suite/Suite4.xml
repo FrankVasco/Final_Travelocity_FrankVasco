@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+
+    <parameter name="browser" value="chrome"></parameter>
+    <test name="ChromeTest">
+        <classes>
+            <class name="travelocity.Tests.Tests4">
+                <methods>
+                    <include name="Test7_8"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
