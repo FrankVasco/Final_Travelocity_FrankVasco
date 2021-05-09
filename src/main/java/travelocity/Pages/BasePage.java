@@ -43,6 +43,10 @@ public class BasePage {
         getWait().until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(element))));
     }
 
+    /**
+     * Generic method to wait until an element is vivible
+     * @param element
+     */
     public void findElementUntillVisibility(WebElement element){
         getWait().until(ExpectedConditions.visibilityOf(element));
     }
@@ -91,12 +95,25 @@ public class BasePage {
         element.sendKeys(text);
     }
 
+
+    /**
+     * Select an option of a dropdown
+     * @param element
+     * @param value
+     */
     public void selectDropdown(WebElement element, String value ){
         Select dropdown = new Select(element);
         dropdown.selectByValue(value);
     }
 
-
+    /**
+     *
+     */
+    public void dispose(){
+        if(driver != null){
+            driver.quit();
+        }
+    }
 
 
 }

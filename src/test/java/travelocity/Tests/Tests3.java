@@ -2,6 +2,7 @@ package travelocity.Tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,6 +15,9 @@ public class Tests3 {
 
     public MyDriver myDriver;
     public WebDriver driver;
+    FlightSearchPage flightSearchPage;
+    FlightSumaryPage flightSumaryPage;
+    FlightDetailsRightSection flightDetailsRightSection;
 
 
     @BeforeClass(alwaysRun = true)
@@ -28,24 +32,29 @@ public class Tests3 {
 
     @Test(description = "Select the first result that containes las Vegas (LAS) as destination and click on continue, and verify the info in the new page")
     public void Test5_6() {
-        FlightSearchPage flightSearchPage = new FlightSearchPage(driver);
+        flightSearchPage = new FlightSearchPage(driver);
         flightSearchPage.clickOnOptionFlightTo("LAX");
-        FlightDetailsRightSection flightDetailsRightSection = new FlightDetailsRightSection(driver);
+        flightDetailsRightSection = new FlightDetailsRightSection(driver);
         String itineraryDepartureText = flightDetailsRightSection.getTextItinerary();
-        System.out.println("Test " + itineraryDepartureText);
         flightDetailsRightSection.clickContinueButton();
         flightSearchPage.clickOnOptionFlightTo("LAS");
         String itineraryReturningText = flightDetailsRightSection.getTextItinerary();
-        System.out.println("Test " + itineraryReturningText);
         Assert.assertEquals(flightDetailsRightSection.getTextItinerary(), "Los Angeles to Las Vegas");
         flightDetailsRightSection.clickContinueButton();
         flightSearchPage.changeTab("Flight Details");
-        FlightSumaryPage flightSumaryPage = new FlightSumaryPage(driver);
+        flightSumaryPage = new FlightSumaryPage(driver);
         Assert.assertEquals(itineraryDepartureText, flightSumaryPage.selectTextDeparture());
         Assert.assertEquals(itineraryReturningText, flightSumaryPage.selectTextReturning());
         Assert.assertTrue(flightSumaryPage.verifyPrice());
 
+    }
 
+
+    @AfterTest
+    public void closePage(){
+        flightSearchPage.dispose();
+        flightSumaryPage.dispose();
+        flightDetailsRightSection.dispose();
     }
 
 

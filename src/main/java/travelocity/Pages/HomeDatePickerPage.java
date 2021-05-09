@@ -61,7 +61,11 @@ public class HomeDatePickerPage extends BasePage {
         click(doneButton);
     }
 
-
+    /**
+     * This method constructs the css selector for the dates in the datePicker
+     * @param monthInAdvance
+     * @return
+     */
 
     public String getFutureDate(int monthInAdvance){
         LocalDate date = LocalDate.now();

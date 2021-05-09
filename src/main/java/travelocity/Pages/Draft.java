@@ -11,16 +11,10 @@ public class Draft {
 
 
     @Test
-public void test(){
+    public void test() {
 
 
-
-
-}
-
-
-
-
+    }
 
 
 }

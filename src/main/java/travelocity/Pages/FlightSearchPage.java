@@ -35,12 +35,18 @@ public class FlightSearchPage extends BasePage {
     private List<WebElement> detailsFlightFrom_To;
 
 
-
+    /**
+     * Click on sort dropdown
+     */
     public void clickOnSortByDropdown(){
         findElementUntilClickable(sortByDropdown);
         click(sortByDropdown);
     }
 
+    /**
+     * Select one option in the dropdown Sort by
+     * @param value is the values of the option in the dropdown that needs to be selected
+     */
     public void selectOptionSortBy(String value){
         findElementUntilClickable (sortByDropdown);
         click(sortByDropdown);
@@ -48,6 +54,11 @@ public class FlightSearchPage extends BasePage {
         selectDropdown(sortByDropdown, value);
     }
 
+
+    /**
+     * Verifies that flight duratin is displayed
+     * @return
+     */
     public int verifyFlightDurationIsDisplayed(){
         findElementUntilClickable(sortByDropdown);
         int cont = 0;
@@ -59,12 +70,20 @@ public class FlightSearchPage extends BasePage {
        return cont;
     }
 
+    /**
+     * Counts the number of cards displayed in the web
+     * @return
+     */
     public int numberOfCardsDisplayed(){
         findElementUntilClickable(sortByDropdown);
         System.out.println(flightDuration.size());
        return flightDuration.size();
     }
 
+    /**
+     * Gets the times of each flight and verifies if it is sorted ascending
+     * @return return a count of the number of elements that are sorted
+     */
     public int listOfDurationTimeOrdered(){
         ArrayList<Integer> flightTimeList = new ArrayList<>();
         flightTimeList = listOfFlightDuration();
@@ -80,7 +99,7 @@ public class FlightSearchPage extends BasePage {
 
     /**
      * Populates the arrayList with the duration time in this way hhmm (Where hh: hour, mm:minute)
-     * @return
+     * @return An arrayList with all the time duration
      */
     public ArrayList<Integer> listOfFlightDuration(){
         ArrayList<Integer> flightTimeList = new ArrayList<>();
@@ -94,7 +113,7 @@ public class FlightSearchPage extends BasePage {
 
     /**
      * This methos remove the text after(, and also remove all  letters ans spaces
-     * @param word
+     * @param word with special characters ex:
      * @return
      */
     public int removeLettersFromTime(String word){
@@ -125,15 +144,18 @@ public class FlightSearchPage extends BasePage {
     }
 
     /**
-     * Clics in the element in the position given by the method selectFirstOptionFlightTo(destination)
-     * @param destination
+     * Clicks in the element position given by the method selectFirstOptionFlightTo(destination)
+     * @param destination destination String
      */
     public void clickOnOptionFlightTo(String destination){
     findElementUntilClickable(sortByDropdown);
     flightCards.get(selectFirstOptionFlightTo(destination)).click();
     }
 
-
+    /**
+     *Change the tab in the browser
+     * @param tab
+     */
     public void changeTab(String tab) {
         ArrayList<String> handles = new ArrayList<>(getDriver().getWindowHandles());
         for (String data : handles) {

@@ -2,6 +2,7 @@ package travelocity.Tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -13,6 +14,7 @@ public class Tests2 {
 
     public MyDriver myDriver;
     public WebDriver driver;
+    FlightSearchPage flightSearchPage;
 
 
     @BeforeClass(alwaysRun = true)
@@ -29,7 +31,7 @@ public class Tests2 {
 
     @Test(description = "Verify that the flight cards has flight Duration")
     public void Test2c(){
-        FlightSearchPage flightSearchPage = new FlightSearchPage(driver);
+        flightSearchPage = new FlightSearchPage(driver);
         Assert.assertEquals(flightSearchPage.numberOfCardsDisplayed(), flightSearchPage.verifyFlightDurationIsDisplayed());
     }
 
@@ -44,11 +46,16 @@ public class Tests2 {
 
     @Test(description = "Select the first result that containes Los Angeles (LAX) as destination and click on continue")
     public void Test4() {
-        FlightSearchPage flightSearchPage = new FlightSearchPage(driver);
+        flightSearchPage = new FlightSearchPage(driver);
         flightSearchPage.clickOnOptionFlightTo("LAX");
         FlightDetailsRightSection flightDetailsRightSection = new FlightDetailsRightSection(driver);
         Assert.assertEquals(flightDetailsRightSection.getTextItinerary(), "Las Vegas to Los Angeles");
         flightDetailsRightSection.clickContinueButton();
+    }
+
+    @AfterTest
+    public void closePage(){
+        flightSearchPage.dispose();
     }
 
 

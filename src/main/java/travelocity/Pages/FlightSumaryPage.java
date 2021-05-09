@@ -29,6 +29,10 @@ public class FlightSumaryPage extends BasePage {
         return getTextElement(routeLabel.get(1));
     }
 
+    /**
+     * Verify the price is present
+     * @return
+     */
     public boolean verifyPrice(){
         Boolean isPricePresent = false;
         if(getTextElement(priceLabel)!=null){
